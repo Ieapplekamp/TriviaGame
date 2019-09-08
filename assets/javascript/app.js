@@ -1,19 +1,17 @@
 // https://www.usefultrivia.com/music_trivia/index_iii.html
 // manipulate the dom manipulate the dom manipulate the dom
-
+$(document).ready(function() {
 // Start button - something the user clicks/presses to start the code, not much else on the screen
 
 // once pressed, the screen will change to the game itself
+    
 // the game will start a timer (fuck timers man) immediately (probably like a minute and a half would be best depending on the questions)
+    
 // there will be a bunch of questions (do the fucking hard one man just fucking do it, make the god damn screen dynamic n shit just fuckin do it)
+    
 // each question will have like 4 answers
-// if the user guesses the correct choice ++ that shit at the very end
-// else if the user guesses the wrong choice ++ loser total
-// also if the user doesn't guess the answer count that shit against them
-// somethings got to change the screen and display totals and shit once the timer is out 
-// going to need something to start the next game - ya fucking reset(bitch)
 
-$(document).ready(function() {
+
 
     // alright so what kinda variables do i need.. think objects? :/ 
     var wins = 0;
@@ -78,9 +76,8 @@ $(document).ready(function() {
         var converter = timeConverter(time++);
         $('#timer').text(converter);
 
-        if (time === 130) {
-            console.log('You dead'); // this just keeps going lol
-            clearInterval(interval);
+        if (time === 10) {
+            console.log('You dead');
             console.log(interval);
         }
 
@@ -106,10 +103,17 @@ $(document).ready(function() {
     
 
 
-
-
-
-
-
     
 })
+
+
+
+// if the user guesses the correct choice ++ that shit at the very end
+    
+// else if the user guesses the wrong choice ++ loser total
+    
+// also if the user doesn't guess the answer count that shit against them
+
+// somethings got to change the screen and display totals and shit once the timer is out 
+    
+// going to need something to start the next game - ya fucking reset(bitch)
