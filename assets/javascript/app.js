@@ -23,9 +23,9 @@ $(document).ready(function() {
     // an onLoad() kind of function to change the DOM
     //this is probably going to have to go in the start function becuase I want the page to dynamically change on click
 
-    function home() {
+    //function home() {
         // i want this to be how the home screen will display for the user. it wont be used more than once maybe
-    }
+    //}
 
     // possible questions
     var questions = ["Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?",
@@ -47,29 +47,63 @@ $(document).ready(function() {
 
     randomQuestion = questions[Math.floor(Math.random() * questions.length)];
 
-    $('#questions').append(randomQuestion);
+    $('#questions').html(randomQuestion);
     console.log(randomQuestion);
 
 
+
+
     // --------------------- stop watch attempt --------------------- \\
-    var timerInerval = 130
+    // this is the hangman game all over
     var interval;
+
+    var clockRunning = false;
+    var time = 0;
+    
         
-    $('#timer').on("click", startTimer);
+    $('#start').on("click", startTimer);
 
     function startTimer() {
-        clearInterval(interval);
-        interval = setInterval(timeDown, 1300);
-        console.log(interval); // why did this say 7 lol
-    }
-    function timeDown() {
-        timerInerval--;
-        $('#timer').html('<h2>' + timerInerval + '</h2>');
 
-        if (timerInerval === 0) {
-            console.log('You dead'); // this just keeps going lol
-        }
+        if (!clockRunning) {
+            interval = setInterval(counter, 1000);
+            console.log(interval); // why did this say 7 lol
+            clockRunning = true;
+        } 
+        
     }
+
+    function counter() {
+
+        var converter = timeConverter(time++);
+        $('#timer').text(converter);
+
+        if (time === 130) {
+            console.log('You dead'); // this just keeps going lol
+            clearInterval(interval);
+            console.log(interval);
+        }
+
+    }
+    function timeConverter(e) {
+
+        var minutes = Math.floor(e / 60);
+        var seconds = e - (minutes * 60);
+      
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+      
+        if (minutes === 0) {
+          minutes = "00";
+        }
+        else if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+      
+        return minutes + " : " + seconds;
+      }
+    
 
 
 
