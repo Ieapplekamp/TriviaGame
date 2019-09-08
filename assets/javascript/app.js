@@ -52,6 +52,30 @@ $(document).ready(function() {
 
 
     // --------------------- stop watch attempt --------------------- \\
+    var timerInerval = 130
+    var interval;
+        
+    $('#timer').on("click", startTimer);
+
+    function startTimer() {
+        clearInterval(interval);
+        interval = setInterval(timeDown, 1300);
+        console.log(interval); // why did this say 7 lol
+    }
+    function timeDown() {
+        timerInerval--;
+        $('#timer').html('<h2>' + timerInerval + '</h2>');
+
+        if (timerInerval === 0) {
+            console.log('You dead'); // this just keeps going lol
+        }
+    }
 
 
+
+
+
+
+
+    
 })
