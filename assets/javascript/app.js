@@ -26,26 +26,49 @@ $(document).ready(function() {
     //}
 
     // possible questions
-    var questions = ["Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?",
-        "What was the band known as Linkin Park originally called?",
-        "What was the name of the airplane Buddy Holly died in?",
-        "What was Bob Marley's song 'I Shot the Sheriff' really about?", 
-        "How many different instruments did Prince play on his debut album?",
-        "What band did Prince form in 1981?", 
-        "What band was originally named Tony Flow and the Miraculously Majestic Masters of Mayhem?"];
+    var questionsAnswers = [
+        
+        {
+            question: "Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?",
+            choices: ["Cry Cry Cry", "Hurt", "Ring Of Fire", "All I DO Is Drive"],
+            answer: 'Ring Of Fire'
+        },
+        {
+            question: "What was the band known as Linkin Park originally called?",
+            choices: ["Reanimators", "Meteora", "Hybrid Theory", "Xero"],
+            answer: 'Xero'
+        },
+        {
+            question: "What was the name of the airplane Buddy Holly died in?",
+            choices: ["So Long", "American Pie", "Peggy Sue", "Rave On"],
+            answer: 'American Pie'
+        },
+        {
+            question: "What was Bob Marley's song 'I Shot the Sheriff' really about?", 
+            choices: ["His Record Label", "The Media", "Birth Control", "Irish Republican Army"],
+            answer: 'Birth Control'
+        },
+        {
+            question: "How many different instruments did Prince play on his debut album?",
+            choices: ["16", "9", "3", "27"],
+            answer: '27'
+        },
+        {
+            question: "What band did Prince form in 1981?", 
+            choices: ["The Revolution", "The Bangles", "3rdeyegirl", "The Time"],
+            answer: 'The Time'
+        },
+        {
+            question: "What band was originally named Tony Flow and the Miraculously Majestic Masters of Mayhem?",
+            choice: ["Pear Jam", "Red Hot Chili Peppers", "Pierce The Veil", "G-Unit"],
+            answer: 'Red Hot Chili Peppers'
+        }
 
-    // an idea
-    var correctAnwers = ['Ring Of Fire',
-        'Xero',
-        'American Pie',
-        'Birth Control',
-        '27',
-        'The Time',
-        'Red Hot Chili Peppers']; 
+    ];
+// messed this up by turning things into an object lol
+    randomQuestion = questionsAnswers[Math.floor(Math.random() * questionsAnswers.length)];
 
-    randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-
-    $('#questions').html(randomQuestion);
+    $('#questions').html(randomQuestion); 
     console.log(randomQuestion);
 
 
