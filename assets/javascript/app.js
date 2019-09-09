@@ -129,9 +129,11 @@ $(document).ready(function() {
         var converter = timeConverter(time++);
         $('#timer').text(converter);
 
-        if (time === 10) {
+        if (time === 11) {
+            alert("Times Up");
             console.log('You dead');
-            console.log(interval);
+            clearInterval(interval);
+            ;
         }
 
     }
