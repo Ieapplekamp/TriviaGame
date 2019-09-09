@@ -65,11 +65,41 @@ $(document).ready(function() {
         }
 
     ];
-// messed this up by turning things into an object lol
-    randomQuestion = questionsAnswers[Math.floor(Math.random() * questionsAnswers.length)];
 
-    $('#questions').html(randomQuestion); 
-    console.log(randomQuestion);
+    var initialQuestion = Math.floor(Math.random() * 7);
+
+    function startGame() {
+
+        var question = questionsAnswers[initialQuestion].question;
+        var choices = questionsAnswers[initialQuestion].choices;
+
+        $("#questions").html(question + '<br>' + questionChoices(choices));
+
+    }
+
+    function questionChoices(choices) {
+        var result = '';
+
+        for (var i = 0; i < choices.length; i++) {
+            result += `<h6 data-answer="${choices[i]}">${choices[i]}</h6>`;
+        }
+
+        return result;
+    }
+    
+    startGame()
+
+
+// messed this up by turning things into an object lol
+    // randomQuestion = questionsAnswers[Math.floor(Math.random() * questionsAnswers.length)];
+
+    // $('#questions').html(randomQuestion); 
+    // console.log(randomQuestion);
+
+
+
+
+
 
 
 
