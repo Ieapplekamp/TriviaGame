@@ -75,7 +75,7 @@ $(document).ready(function() {
         }
 
         $(document).on('click', '.buttons', function() {
-            console.log(questionsAnswers.choices); // currently undefined
+            console.log(questionsAnswers[i].choices); // currently undefined
         });
         
         return result;
