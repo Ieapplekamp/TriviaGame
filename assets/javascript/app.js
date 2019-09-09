@@ -1,9 +1,7 @@
 // https://www.usefultrivia.com/music_trivia/index_iii.html
-// manipulate the dom manipulate the dom manipulate the dom
+
 $(document).ready(function() {
 // Start button - something the user clicks/presses to start the code, not much else on the screen
-
-// once pressed, the screen will change to the game itself
     
 // the game will start a timer (fuck timers man) immediately (probably like a minute and a half would be best depending on the questions)
 
@@ -11,8 +9,6 @@ $(document).ready(function() {
     var losses = 0;
     var unanswered = 0;
 
-    // an onLoad() kind of function to change the DOM
-    //this is probably going to have to go in the start function becuase I want the page to dynamically change on click
 
     //function home() {
         // i want this to be how the home screen will display for the user. it wont be used more than once maybe
@@ -75,18 +71,31 @@ $(document).ready(function() {
         var result = '';
 
         for (var i = 0; i < choices.length; i++) {
-            result += `<h6 data-answer="${choices[i]}">${choices[i]}</h6>`;
+            result += `<h6 class="buttons" data-answer="${choices[i]}">${choices[i]}</h6>`;
         }
 
+        $(document).on('click', '.buttons', function() {
+            console.log(questionsAnswers.choices); // currently undefined
+        });
+        
         return result;
+        
     }
     
-    
+    // function onClicks() {
+    //     $(document).on('click', '.buttons', function() {
+    //         console.log(questionsAnswers.choices); // currently undefined
+    //     });
+        
+    // }
+    // onClicks();
+
 
 
 
     // --------------------- stop watch attempt --------------------- \\
     
+
 
     var interval;
 
@@ -95,6 +104,10 @@ $(document).ready(function() {
     
         
     $('#start').on("click", startTimer);
+
+
+    // THIS FUNCTION ACTUALLY STARTS THE GAME
+
 
     function startTimer() {
 
@@ -105,6 +118,7 @@ $(document).ready(function() {
         } 
         
         startGame();
+
     }
 
     function counter() {
