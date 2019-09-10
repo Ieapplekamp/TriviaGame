@@ -61,35 +61,32 @@ $(document).ready(function() {
     function startGame() {
 
         var questions = questionsAnswers[initialQuestion].question;
+        
         var choices = questionsAnswers[initialQuestion].choices;
+        console.log(questions);
 
-        $("#questions").html(questions + '<br>' + questionChoices(choices));
-
+        $("#theQuestions").html(questions + '<br>');
+        questionChoices(choices);
     }
 
     function questionChoices(choices) {
-        var result = '';
-
+        
         for (var i = 0; i < choices.length; i++) {
-            result += `<h6 class="buttons" data-answer="${choices[i]}">${choices[i]}</h6>`;
+            var result = $("<button>");
+            result.addClass("multipleChoices");
+            result.attr("data-Choices", choices[i]);
+            result.text(choices[i]);
+            $(".buttons").append(result);
+            
         }
+        
 
         $(document).on('click', '.buttons', function() {
             console.log(questionsAnswers[i].choices); // currently undefined
         });
         
-        return result;
         
     }
-    
-    // function onClicks() {
-    //     $(document).on('click', '.buttons', function() {
-    //         console.log(questionsAnswers.choices); // currently undefined
-    //     });
-        
-    // }
-    // onClicks();
-
 
 
 
@@ -121,13 +118,14 @@ $(document).ready(function() {
 
     }
 
+
     function counter() {
 
         var converter = timeConverter(time++);
         $('#timer').text(converter);
 
         if (time === 11) {
-            alert("Times Up");
+            //alert("Times Up");
             console.log('You dead');
             clearInterval(interval);
             ;
@@ -167,4 +165,4 @@ $(document).ready(function() {
 
 // somethings got to change the screen and display totals and shit once the timer is out 
     
-// going to need something to start the next game - ya fucking reset(bitch)
+// going to need something to start the next game - ya fucking reset()
