@@ -48,20 +48,20 @@ $(document).ready(function() {
         
     ];
 
-    var initialQuestion = 0;    //Math.floor(Math.random() * 7);
+    var initialQuestion = Math.floor(Math.random() * 7);
     
     function startGame() {
 
         var questions = questionsAnswers[initialQuestion].question;
         var choices = questionsAnswers[initialQuestion].choices;
-        var correctAnswer = questionsAnswers[initialQuestion].answer;
+    
         console.log(questions);
         
 
         $("#theQuestions").html(questions + '<br>');
 
         questionChoices(choices);
-
+        
     }
 
     function questionChoices(choices) {
@@ -69,47 +69,27 @@ $(document).ready(function() {
         
         for (var i = 0; i < choices.length; i++) {
 
+            var correctAnswer = questionsAnswers[initialQuestion].answer;
+
             var result = $("<button>");
             result.addClass("multipleChoices");
             result.attr("data-choices", choices[i]);
             result.text(choices[i]);
             $(".buttons").append(result);
             
+            
         }
+
         $('.multipleChoices').on('click', function () {
             var value = $(this).attr("data-choices");
             console.log(value);
+            if (correctAnswer === value) {
+                alert("correct");
+            }
         })
     } 
-    //     $('.multipleChoices').on('click', function () {
-    //         var value = $('.multipleChoices').attr("data-choices");
-    //         console.log(value);
-    //         var chosenAnswer = questionsAnswers[initialQuestion].choices;
-    //         console.log($('.multipleChoices').attr('data-choices'));
-            
-    //         //console.log(correctAnswer, "correct answer")
-    //         if (value === chosenAnswer) {
-    //             console.log('correct');
-    //         }
+
     
-    //         //console.log('hi', questionsAnswers[initialQuestion].choices); 
-    //     });
-        
-        
-    // }
-
-    // $('.buttons').on('click', function () {
-        
-    //     var chosenAnswer = questionsAnswers[initialQuestion].choices;
-    //     console.log(chosenAnswer, 'chosen answer');
-    //     var correctAnswer = questionsAnswers[initialQuestion].answer;
-    //     console.log(correctAnswer, "correct answer")
-    //     if (chosenAnswer === correctAnswer) {
-    //         console.log('correct');
-    //     }
-
-    //     //console.log('hi', questionsAnswers[initialQuestion].choices); 
-    // });
     
 
 
