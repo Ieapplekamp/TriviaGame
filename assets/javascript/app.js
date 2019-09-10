@@ -77,7 +77,7 @@ $(document).ready(function() {
             
         }
         $('.multipleChoices').on('click', function () {
-            var value = $('.multipleChoices').attr("data-choices");
+            var value = $(this).attr("data-choices");
             console.log(value);
         })
     } 
