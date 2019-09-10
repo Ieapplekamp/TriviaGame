@@ -2,17 +2,10 @@
 
 $(document).ready(function() {
 // Start button - something the user clicks/presses to start the code, not much else on the screen
-    
-// the game will start a timer (fuck timers man) immediately (probably like a minute and a half would be best depending on the questions)
 
     var wins = 0;
     var losses = 0;
     var unanswered = 0;
-
-
-    //function home() {
-        // i want this to be how the home screen will display for the user. it wont be used more than once maybe
-    //}
 
     // possible questions
     var questionsAnswers = [
@@ -55,8 +48,7 @@ $(document).ready(function() {
         
     ];
 
-    var initialQuestion = Math.floor(Math.random() * 7);
-    console.log(initialQuestion);
+    var initialQuestion = 0;    //Math.floor(Math.random() * 7);
     
     function startGame() {
 
@@ -66,28 +58,39 @@ $(document).ready(function() {
         console.log(questions);
 
         $("#theQuestions").html(questions + '<br>');
+
         questionChoices(choices);
+
     }
 
     function questionChoices(choices) {
         
+        
         for (var i = 0; i < choices.length; i++) {
             var result = $("<button>");
             result.addClass("multipleChoices");
-            result.attr("data-Choices", choices[i]);
+            result.attr("data-choices", choices[i]);
             result.text(choices[i]);
             $(".buttons").append(result);
             
         }
         
-
-        $(document).on('click', '.buttons', function() {
-            console.log(questionsAnswers[i].choices); // currently undefined
-        });
-        
         
     }
 
+    $(document).on('click', '.buttons', function () {
+            
+        var chosenAnswer = questionsAnswers[initialQuestion].choices;
+        console.log(chosenAnswer, 'test');
+        var correctAnswer = questionsAnswers[initialQuestion].answer;
+
+        if (chosenAnswer === correctAnswer) {
+            console.log('correct');
+        }
+
+        //console.log('hi', questionsAnswers[initialQuestion].choices); 
+    });
+    
 
 
     // --------------------- stop watch attempt --------------------- \\
@@ -110,7 +113,7 @@ $(document).ready(function() {
 
         if (!clockRunning) {
             interval = setInterval(counter, 1000);
-            console.log(interval); // why did this say 7 lol
+            console.log(interval); // why did this say 3 lol
             clockRunning = true;
         } 
         
