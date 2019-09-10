@@ -40,7 +40,7 @@ $(document).ready(function() {
             choices: ["The Revolution", "The Bangles", "3rdeyegirl", "The Time"],
             answer: 'The Time'
         },
-        { // doesn't show up
+        { // 
             question: "What band was originally named Tony Flow and the Miraculously Majestic Masters of Mayhem?",
             choices: ["Pear Jam", "Red Hot Chili Peppers", "Pierce The Veil", "G-Unit"],
             answer: 'Red Hot Chili Peppers'
@@ -53,9 +53,10 @@ $(document).ready(function() {
     function startGame() {
 
         var questions = questionsAnswers[initialQuestion].question;
-        
         var choices = questionsAnswers[initialQuestion].choices;
+        var correctAnswer = questionsAnswers[initialQuestion].answer;
         console.log(questions);
+        
 
         $("#theQuestions").html(questions + '<br>');
 
@@ -67,6 +68,7 @@ $(document).ready(function() {
         
         
         for (var i = 0; i < choices.length; i++) {
+
             var result = $("<button>");
             result.addClass("multipleChoices");
             result.attr("data-choices", choices[i]);
@@ -74,22 +76,40 @@ $(document).ready(function() {
             $(".buttons").append(result);
             
         }
-        
-        
-    }
-
-    $(document).on('click', '.buttons', function () {
+        $('.multipleChoices').on('click', function () {
+            var value = $('.multipleChoices').attr("data-choices");
+            console.log(value);
+        })
+    } 
+    //     $('.multipleChoices').on('click', function () {
+    //         var value = $('.multipleChoices').attr("data-choices");
+    //         console.log(value);
+    //         var chosenAnswer = questionsAnswers[initialQuestion].choices;
+    //         console.log($('.multipleChoices').attr('data-choices'));
             
-        var chosenAnswer = questionsAnswers[initialQuestion].choices;
-        console.log(chosenAnswer, 'test');
-        var correctAnswer = questionsAnswers[initialQuestion].answer;
+    //         //console.log(correctAnswer, "correct answer")
+    //         if (value === chosenAnswer) {
+    //             console.log('correct');
+    //         }
+    
+    //         //console.log('hi', questionsAnswers[initialQuestion].choices); 
+    //     });
+        
+        
+    // }
 
-        if (chosenAnswer === correctAnswer) {
-            console.log('correct');
-        }
+    // $('.buttons').on('click', function () {
+        
+    //     var chosenAnswer = questionsAnswers[initialQuestion].choices;
+    //     console.log(chosenAnswer, 'chosen answer');
+    //     var correctAnswer = questionsAnswers[initialQuestion].answer;
+    //     console.log(correctAnswer, "correct answer")
+    //     if (chosenAnswer === correctAnswer) {
+    //         console.log('correct');
+    //     }
 
-        //console.log('hi', questionsAnswers[initialQuestion].choices); 
-    });
+    //     //console.log('hi', questionsAnswers[initialQuestion].choices); 
+    // });
     
 
 
