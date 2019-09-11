@@ -40,8 +40,27 @@ $(document).ready(function() {
             question: "What band was originally named Tony Flow and the Miraculously Majestic Masters of Mayhem?",
             choices: ["Pear Jam", "Red Hot Chili Peppers", "Pierce The Veil", "G-Unit"],
             answer: 'Red Hot Chili Peppers'
+        },
+        { 
+            question: "Which of these is not a Frank Ocean song?",
+            choices: ["Nikes", "Pink Matter", "Pyramids", "1. The Worst Guys"],
+            answer: '1. The Worst Guys'
+        },
+        { 
+            question: "Who bumped Michael Jackson off the #1 spot in January 1992?",
+            choices: ["Madonna", "Nirvana", "Mariah Carey", "Guns N' Roses"],
+            answer: 'Nirvana'
+        },
+        { 
+            question: "What day 2pac die?",
+            choices: ["September 13th, 1996", "September 13th, 1995", "August 29th, 1996", "July 14th, 1996"],
+            answer: 'September 13th, 1996'
+        },
+        {
+            question: "Who sings Baby Boy",
+            choices: ["Beyonce", "Ciara", "Mariah Carey", "Destiny's Child"],
+            answer: 'Beyconcé'
         }
-        
     ];
 
     var wins = 0;
