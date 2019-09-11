@@ -93,6 +93,8 @@ $(document).ready(function() {
             }
             
             starterQuestion();
+            
+            // im a genius 
             $("button").slice(4).hide();
             // $('#buttons').replaceWith(result);
         })
