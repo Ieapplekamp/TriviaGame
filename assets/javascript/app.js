@@ -3,10 +3,6 @@
 $(document).ready(function() {
 // Start button - something the user clicks/presses to start the code, not much else on the screen
 
-    var wins = 0;
-    var losses = 0;
-    var unanswered = 0;
-
     // possible questions
     var questionsAnswers = [
         
@@ -48,12 +44,17 @@ $(document).ready(function() {
         
     ];
 
-    var initialQuestion = Math.floor(Math.random() * 7);
-    
-    function startGame() {
+    var wins = 0;
+    var losses = 0;
+    var unanswered = 0;
 
-        var questions = questionsAnswers[initialQuestion].question;
-        var choices = questionsAnswers[initialQuestion].choices;
+    var initialQuestion = 0;       //Math.floor(Math.random() * 7);
+
+
+    function starterQuestion() {
+       
+       var questions = questionsAnswers[initialQuestion].question;
+       var choices = questionsAnswers[initialQuestion].choices;
     
         console.log(questions);
         
@@ -62,13 +63,15 @@ $(document).ready(function() {
 
         questionChoices(choices);
         
+        
+        
     }
 
     function questionChoices(choices) {
         
         
         for (var i = 0; i < choices.length; i++) {
-
+            
             var correctAnswer = questionsAnswers[initialQuestion].answer;
 
             var result = $("<button>");
@@ -84,13 +87,16 @@ $(document).ready(function() {
             var value = $(this).attr("data-choices");
             console.log(value);
             if (correctAnswer === value) {
-                alert("correct");
+                wins++;
+                initialQuestion++;
+                alert("Correct! " + value);
+                console.log('wins ' + wins);
+                starterQuestion();
+                
             }
         })
     } 
 
-    
-    
 
 
     // --------------------- stop watch attempt --------------------- \\
@@ -113,11 +119,11 @@ $(document).ready(function() {
 
         if (!clockRunning) {
             interval = setInterval(counter, 1000);
-            console.log(interval); // why did this say 3 lol
+            //console.log(interval); // why did this say 3 lol
             clockRunning = true;
         } 
         
-        startGame();
+        starterQuestion();
 
     }
 
@@ -129,7 +135,7 @@ $(document).ready(function() {
 
         if (time === 11) {
             //alert("Times Up");
-            console.log('You dead');
+            //console.log('You dead');
             clearInterval(interval);
             ;
         }
