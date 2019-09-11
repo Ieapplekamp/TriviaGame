@@ -55,35 +55,29 @@ $(document).ready(function() {
        
        var questions = questionsAnswers[initialQuestion].question;
        var choices = questionsAnswers[initialQuestion].choices;
-    
+       var correctAnswer = questionsAnswers[initialQuestion].answer;
+        
         console.log(questions);
         
 
         $("#theQuestions").html(questions + '<br>');
 
-        questionChoices(choices);
-        
-        
-        
-    }
+        //$('#buttons').html('<button class="multipleChoices" data-choices=' + $(this).attr(choices[0]) + '>' + choices[0] + '</button>');
 
-    function questionChoices(choices) {
-        
-        
+    //    $("#buttons").html(result);
         for (var i = 0; i < choices.length; i++) {
             
-            var correctAnswer = questionsAnswers[initialQuestion].answer;
+            // var correctAnswer = questionsAnswers[initialQuestion].answer;
 
             var result = $("<button>");
             result.addClass("multipleChoices");
             result.attr("data-choices", choices[i]);
-            result.text(choices[i]);
-            $(".buttons").append(result);
-            
-            
+            result.html(choices[i]);
+            $("#buttons").append(result);
+            console.log(result);
         }
 
-        $('.multipleChoices').on('click', function () {
+        $('.multipleChoices').on('click', function() {
             var value = $(this).attr("data-choices");
             console.log(value);
             if (correctAnswer === value) {
@@ -91,13 +85,17 @@ $(document).ready(function() {
                 initialQuestion++;
                 alert("Correct! " + value);
                 console.log('wins ' + wins);
+                
                 starterQuestion();
                 
             }
         })
-    } 
+    
+        
+        
+    }
 
-
+    
 
     // --------------------- stop watch attempt --------------------- \\
     
@@ -124,7 +122,7 @@ $(document).ready(function() {
         } 
         
         starterQuestion();
-
+        
     }
 
 
