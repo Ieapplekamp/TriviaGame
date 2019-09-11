@@ -53,6 +53,7 @@ $(document).ready(function() {
 
     function starterQuestion() {
        
+        
        var questions = questionsAnswers[initialQuestion].question;
        var choices = questionsAnswers[initialQuestion].choices;
        var correctAnswer = questionsAnswers[initialQuestion].answer;
@@ -63,7 +64,7 @@ $(document).ready(function() {
         $("#theQuestions").html(questions + '<br>');
 
         //$('#buttons').html('<button class="multipleChoices" data-choices=' + $(this).attr(choices[0]) + '>' + choices[0] + '</button>');
-
+        
     //    $("#buttons").html(result);
         for (var i = 0; i < choices.length; i++) {
             
@@ -72,8 +73,9 @@ $(document).ready(function() {
             var result = $("<button>");
             result.addClass("multipleChoices");
             result.attr("data-choices", choices[i]);
-            result.html(choices[i]);
-            $("#buttons").append(result);
+            result.text(choices[i]);
+        
+            $("#buttons").prepend(result);
             console.log(result);
         }
 
@@ -86,16 +88,26 @@ $(document).ready(function() {
                 alert("Correct! " + value);
                 console.log('wins ' + wins);
                 
-                starterQuestion();
-                
+                // starterQuestion();
+
             }
+            
+            starterQuestion();
+            $("button").slice(4).hide();
+            // $('#buttons').replaceWith(result);
         })
-    
+        
         
         
     }
 
-    
+    // function clearChoices() {
+
+    //     if (initialQuestion > 0) {
+    //         $("#buttons").clear(result);
+    //     }
+    // }
+   
 
     // --------------------- stop watch attempt --------------------- \\
     
