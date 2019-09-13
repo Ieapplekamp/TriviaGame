@@ -1,7 +1,91 @@
 // https://www.usefultrivia.com/music_trivia/index_iii.html
 
 $(document).ready(function() {
-// Start button - something the user clicks/presses to start the code, not much else on the screen
+
+
+      // --------------------- stop watch begins -------------------- \\
+    
+    var interval;
+    var intervalTwo;
+
+    var clockRunning = false;
+    var time = 0;
+    var timeTwo = 0;
+      
+         
+    $('#start').on("click", startTimer);
+  
+  
+      // THIS FUNCTION ACTUALLY STARTS THE GAME
+    function startTimer() {
+  
+        if (!clockRunning) {
+            interval = setInterval(counter, 1000);
+            intervalTwo = setInterval(shortTimer, 1000);
+            //console.log(interval); // why did this say 3 lol
+            clockRunning = true;
+            
+        } 
+        
+        starterQuestion();
+          
+    }
+  
+  
+    function counter() {
+        
+        var converter = timeConverter(time++);
+        $('#timer').text(converter);
+  
+        if (time === 120) {
+            //alert("Times Up");
+            //console.log('You dead');
+            clearInterval(interval);
+        }
+  
+    }
+    
+    function shortTimer() {
+       
+        var converter = timeConverter(timeTwo++);
+        $('#recommendedTimer').text(converter);
+        
+        if (timeTwo === 16) {
+            unanswered++;
+            initialQuestion++;
+            timeTwo = 0;
+            starterQuestion();
+            $("button").slice(4).hide();
+            console.log('unanswered ' + unanswered);
+        }
+        
+    }
+    
+  
+    function timeConverter(e) {
+  
+        var minutes = Math.floor(e / 60);
+        var seconds = e - (minutes * 60);
+        
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        
+        if (minutes === 0) {
+            minutes = "00";
+        }
+        else if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        
+        return minutes + " : " + seconds;
+    }
+      
+      
+  
+  
+  // --------------------- stop watch ends -------------------- \\
+
 
     // possible questions
     var questionsAnswers = [
@@ -58,8 +142,8 @@ $(document).ready(function() {
         },
         {
             question: "Who sings Baby Boy",
-            choices: ["Beyonce", "Ciara", "Mariah Carey", "Destiny's Child"],
-            answer: 'Beyconcé'
+            choices: ["Beyoncé", "Ciara", "Mariah Carey", "Destiny's Child"],
+            answer: 'Beyoncé'
         }
     ];
 
@@ -71,20 +155,16 @@ $(document).ready(function() {
 
 
     function starterQuestion() {
-       
-        
-       var questions = questionsAnswers[initialQuestion].question;
-       var choices = questionsAnswers[initialQuestion].choices;
-       var correctAnswer = questionsAnswers[initialQuestion].answer;
+
+        var questions = questionsAnswers[initialQuestion].question;
+        var choices = questionsAnswers[initialQuestion].choices;
+        var correctAnswer = questionsAnswers[initialQuestion].answer;
         
         console.log(questions);
         
-
         $("#theQuestions").html(questions + '<br>');
-
-        //$('#buttons').html('<button class="multipleChoices" data-choices=' + $(this).attr(choices[0]) + '>' + choices[0] + '</button>');
         
-    //    $("#buttons").html(result);
+
         for (var i = 0; i < choices.length; i++) {
             
             // var correctAnswer = questionsAnswers[initialQuestion].answer;
@@ -95,7 +175,7 @@ $(document).ready(function() {
             result.text(choices[i]);
         
             $("#buttons").prepend(result);
-            console.log(result);
+            //console.log(result);
         }
 
         $('.multipleChoices').on('click', function() {
@@ -104,97 +184,34 @@ $(document).ready(function() {
             if (correctAnswer === value) {
                 wins++;
                 initialQuestion++;
-                alert("Correct! " + value);
-                console.log('wins ' + wins);
+                timeTwo = 0;
+                //alert("Correct! " + value);
+                console.log('Wins ' + wins);
                 
                 // starterQuestion();
 
-            }
+            } else if (correctAnswer !== value) {
+                losses++;
+                initialQuestion++;
+                timeTwo = 0;
+                console.log('Losses ' + losses);
+            } 
             
             starterQuestion();
-            
             // im a genius 
             $("button").slice(4).hide();
-            // $('#buttons').replaceWith(result);
+    
         })
         
-        
-        
     }
-
-    // function clearChoices() {
-
-    //     if (initialQuestion > 0) {
-    //         $("#buttons").clear(result);
-    //     }
-    // }
-   
-
-    // --------------------- stop watch attempt --------------------- \\
-    
-
-
-    var interval;
-
-    var clockRunning = false;
-    var time = 0;
-    
-        
-    $('#start').on("click", startTimer);
-
-
-    // THIS FUNCTION ACTUALLY STARTS THE GAME
-
-
-    function startTimer() {
-
-        if (!clockRunning) {
-            interval = setInterval(counter, 1000);
-            //console.log(interval); // why did this say 3 lol
-            clockRunning = true;
-        } 
-        
-        starterQuestion();
-        
-    }
-
-
-    function counter() {
-
-        var converter = timeConverter(time++);
-        $('#timer').text(converter);
-
-        if (time === 11) {
-            //alert("Times Up");
-            //console.log('You dead');
-            clearInterval(interval);
-            ;
-        }
-
-    }
-
-    function timeConverter(e) {
-
-        var minutes = Math.floor(e / 60);
-        var seconds = e - (minutes * 60);
-      
-        if (seconds < 10) {
-          seconds = "0" + seconds;
-        }
-      
-        if (minutes === 0) {
-          minutes = "00";
-        }
-        else if (minutes < 10) {
-          minutes = "0" + minutes;
-        }
-      
-        return minutes + " : " + seconds;
-      }
-    
     
 })
+// okay so a reset 
+    
+    
+   
 
+  
 
 
 // if the user guesses the correct choice ++ that shit at the very end
