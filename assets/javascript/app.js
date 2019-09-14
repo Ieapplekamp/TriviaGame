@@ -3,17 +3,46 @@
 $(document).ready(function() {
 
 
-      // --------------------- stop watch begins -------------------- \\
+    // --------------------- stop watch begins -------------------- \\
     
     var interval;
     var intervalTwo;
 
     var clockRunning = false;
-    var time = 0;
+    var time = 120;
     var timeTwo = 0;
       
          
     $('#start').on("click", startTimer);
+    // $('#restart').on("click", restart);
+    $('#restart').hide();
+
+    $('#restart').on("click", function() {
+        time = 120;
+        clockRunning = false;
+        timeTwo = 0;
+        initialQuestion = 0;
+        wins = 0;
+        losses = 0;
+        unanswered = 0;
+        // $('#restart').hide();
+
+        $('#correct').hide();
+        $('#incorrect').hide();
+        $('#unanswered').hide();
+
+        
+        $("#theQuestions").show();
+        $('#buttons').show();
+        // $("button").slice(4).hide();
+        
+        // start();
+        // // startTimer();
+        startTimer();
+        starterQuestion();
+        $("button").slice(4).hide();
+    
+    })
   
   
       // THIS FUNCTION ACTUALLY STARTS THE GAME
@@ -24,23 +53,27 @@ $(document).ready(function() {
             intervalTwo = setInterval(shortTimer, 1000);
             //console.log(interval); // why did this say 3 lol
             clockRunning = true;
+            $('#start').hide();
+            $('#restart').hide();
             
         } 
         
         starterQuestion();
+        
           
     }
   
   
     function counter() {
         
-        var converter = timeConverter(time++);
+        var converter = timeConverter(time--);
         $('#timer').text(converter);
   
-        if (time === 120) {
+        if (time === 0) {
             //alert("Times Up");
             //console.log('You dead');
             clearInterval(interval);
+            clearInterval(intervalTwo);
         }
   
     }
@@ -152,7 +185,7 @@ $(document).ready(function() {
     var unanswered = 0;
 
     var initialQuestion = 0;       //Math.floor(Math.random() * 7);
-
+    var questionAmount = 10;
 
     function starterQuestion() {
 
@@ -165,9 +198,9 @@ $(document).ready(function() {
         $("#theQuestions").html(questions + '<br>');
         
 
+
+
         for (var i = 0; i < choices.length; i++) {
-            
-            // var correctAnswer = questionsAnswers[initialQuestion].answer;
 
             var result = $("<button>");
             result.addClass("multipleChoices");
@@ -181,20 +214,40 @@ $(document).ready(function() {
         $('.multipleChoices').on('click', function() {
             var value = $(this).attr("data-choices");
             console.log(value);
-            if (correctAnswer === value) {
+
+// This is pretty much the results condition
+            
+            if (initialQuestion === questionAmount) {
+
+                clearInterval(interval);
+                clearInterval(intervalTwo);
+                initialQuestion = 0;
+                
+                $('#buttons').hide();
+                $('#theQuestions').hide();
+                $('#correct').show();
+                $('#incorrect').show();
+                $('#unanswered').show();
+
+                $('#correct').html("Correct " + wins);
+                $('#incorrect').html("Incorrect " + losses);
+                $('#unanswered').html("Not Fast Enough " + unanswered);
+                $('#restart').show(); 
+
+                //restart();
+
+            } else if (correctAnswer === value) {
                 wins++;
                 initialQuestion++;
                 timeTwo = 0;
-                //alert("Correct! " + value);
                 console.log('Wins ' + wins);
-                
-                // starterQuestion();
 
             } else if (correctAnswer !== value) {
                 losses++;
                 initialQuestion++;
                 timeTwo = 0;
                 console.log('Losses ' + losses);
+
             } 
             
             starterQuestion();
@@ -206,20 +259,3 @@ $(document).ready(function() {
     }
     
 })
-// okay so a reset 
-    
-    
-   
-
-  
-
-
-// if the user guesses the correct choice ++ that shit at the very end
-    
-// else if the user guesses the wrong choice ++ loser total
-    
-// also if the user doesn't guess the answer count that shit against them
-
-// somethings got to change the screen and display totals and shit once the timer is out 
-    
-// going to need something to start the next game - ya fucking reset()
