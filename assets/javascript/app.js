@@ -12,7 +12,7 @@ $(document).ready(function() {
     var intervalTwo;
 
     var clockRunning = false;
-    var timer = 120;
+    var timer = 30;
     var timerTwo = 0;
       
     // On click event that starts the game
@@ -50,7 +50,7 @@ $(document).ready(function() {
   
         if (!clockRunning) {
 
-            interval = setInterval(counter, 1000);
+            interval = setInterval(mainTimer, 1000);
             intervalTwo = setInterval(shortTimer, 1000);
             //console.log(interval); // why did this say 3 lol
             clockRunning = true;
@@ -74,23 +74,24 @@ $(document).ready(function() {
 
         $('#correct').html("Correct: " + wins);
         $('#incorrect').html("Incorrect: " + losses);
-        $('#unanswered').html("Couldn't decide in time: " + unanswered);
+        $('#unanswered').html("Couldn't decide in time: " + (questionAmount - initialQuestion));
     }
   
   
-    function counter() {
+    function mainTimer() {
         
         var converter = timeConverter(timer--);
         $('#timer').text(converter);
   
         if (timer === 0) {
             alert("Times Up");
-            
+            //initialQuestion++;
             clearInterval(interval);
             clearInterval(intervalTwo);
-            initialQuestion = 0;
-                
+            //initialQuestion = 0;
+            
             hideAndSeek();
+            //$('#unanswered').html("Couldn't decide in time: " +  (questionAmount - initialQuestion));
             
         }
   
@@ -102,8 +103,8 @@ $(document).ready(function() {
         $('#recommendedTimer').text(converter);
         
         if (timerTwo === 16) {
-            unanswered++;
-            initialQuestion++;
+            //questionAmount--;
+            //initialQuestion++;
             timerTwo = 0;
             
             starterQuestion();
@@ -117,7 +118,6 @@ $(document).ready(function() {
         
     }
     
-  
     function timeConverter(e) {
   
         var minutes = Math.floor(e / 60);
@@ -135,13 +135,10 @@ $(document).ready(function() {
         
         return minutes + " : " + seconds;
     }
-      
-      
-  
   
   // --------------------- stop watch ends -------------------- \\
 
-
+    
     // possible questions
     var questionsAnswers = [
         
