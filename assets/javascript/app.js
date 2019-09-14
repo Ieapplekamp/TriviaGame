@@ -2,51 +2,54 @@
 
 $(document).ready(function() {
 
-
+    $('#restart').hide();
+    var initialQuestion = 0;       //Math.floor(Math.random() * 7);
+    var questionAmount = 10;
+    
     // --------------------- stop watch begins -------------------- \\
     
     var interval;
     var intervalTwo;
 
     var clockRunning = false;
-    var time = 120;
-    var timeTwo = 0;
+    var timer = 120;
+    var timerTwo = 0;
       
-         
+    // On click event that starts the game
     $('#start').on("click", startTimer);
-    // $('#restart').on("click", restart);
-    $('#restart').hide();
-
-    $('#restart').on("click", function() {
-        time = 120;
+    $('#restart').on("click", restart);
+    // on click event that restarts the game
+    function restart() {
+        
+        clearInterval(interval);
+        clearInterval(intervalTwo);
+        initialQuestion = 0;
+        timer = 120;
         clockRunning = false;
-        timeTwo = 0;
+        timerTwo = 0;
         initialQuestion = 0;
         wins = 0;
         losses = 0;
         unanswered = 0;
-        // $('#restart').hide();
 
         $('#correct').hide();
         $('#incorrect').hide();
         $('#unanswered').hide();
-
         
         $("#theQuestions").show();
         $('#buttons').show();
-        // $("button").slice(4).hide();
         
         startTimer();
         starterQuestion();
         $("button").slice(4).hide();
     
-    })
-  
-  
-      // THIS FUNCTION ACTUALLY STARTS THE GAME
+    }
+      
+    
     function startTimer() {
   
         if (!clockRunning) {
+
             interval = setInterval(counter, 1000);
             intervalTwo = setInterval(shortTimer, 1000);
             //console.log(interval); // why did this say 3 lol
@@ -58,48 +61,58 @@ $(document).ready(function() {
         
         starterQuestion();
         
-          
+    }
+
+    function hideAndSeek() {
+        $('#buttons').hide();
+        $('#theQuestions').hide();
+
+        $('#restart').show(); 
+        $('#correct').show();
+        $('#incorrect').show();
+        $('#unanswered').show();
+
+        $('#correct').html("Correct: " + wins);
+        $('#incorrect').html("Incorrect: " + losses);
+        $('#unanswered').html("Couldn't decide in time: " + unanswered);
     }
   
   
     function counter() {
         
-        var converter = timeConverter(time--);
+        var converter = timeConverter(timer--);
         $('#timer').text(converter);
   
-        if (time === 0) {
-            //alert("Times Up");
-            //console.log('You dead');
+        if (timer === 0) {
+            alert("Times Up");
+            
             clearInterval(interval);
             clearInterval(intervalTwo);
             initialQuestion = 0;
                 
-            $('#buttons').hide();
-            $('#theQuestions').hide();
-            $('#correct').show();
-            $('#incorrect').show();
-            $('#unanswered').show();
-
-            $('#correct').html("Correct " + wins);
-            $('#incorrect').html("Incorrect " + losses);
-            $('#unanswered').html("Not Fast Enough " + unanswered);
-            $('#restart').show(); 
+            hideAndSeek();
+            
         }
   
     }
     
     function shortTimer() {
        
-        var converter = timeConverter(timeTwo++);
+        var converter = timeConverter(timerTwo++);
         $('#recommendedTimer').text(converter);
         
-        if (timeTwo === 16) {
+        if (timerTwo === 16) {
             unanswered++;
             initialQuestion++;
-            timeTwo = 0;
+            timerTwo = 0;
+            
             starterQuestion();
             $("button").slice(4).hide();
-            console.log('unanswered ' + unanswered);
+            //console.log('unanswered ' + unanswered);
+        } else if (initialQuestion === questionAmount) {
+               
+            clearInterval(intervalTwo);
+            
         }
         
     }
@@ -116,8 +129,7 @@ $(document).ready(function() {
         
         if (minutes === 0) {
             minutes = "00";
-        }
-        else if (minutes < 10) {
+        } else if (minutes < 10) {
             minutes = "0" + minutes;
         }
         
@@ -194,8 +206,8 @@ $(document).ready(function() {
     var losses = 0;
     var unanswered = 0;
 
-    var initialQuestion = 0;       //Math.floor(Math.random() * 7);
-    var questionAmount = 10;
+    // var initialQuestion = 0;       //Math.floor(Math.random() * 7);
+    // var questionAmount = 10;
 
     function starterQuestion() {
 
@@ -203,7 +215,7 @@ $(document).ready(function() {
         var choices = questionsAnswers[initialQuestion].choices;
         var correctAnswer = questionsAnswers[initialQuestion].answer;
         
-        console.log(questions);
+        //console.log(questions);
         
         $("#theQuestions").html(questions + '<br>');
         
@@ -223,7 +235,7 @@ $(document).ready(function() {
 
         $('.multipleChoices').on('click', function() {
             var value = $(this).attr("data-choices");
-            console.log(value);
+            //console.log(value);
 
 // This is pretty much the results condition
             
@@ -233,30 +245,20 @@ $(document).ready(function() {
                 clearInterval(intervalTwo);
                 initialQuestion = 0;
                 
-                $('#buttons').hide();
-                $('#theQuestions').hide();
-                $('#correct').show();
-                $('#incorrect').show();
-                $('#unanswered').show();
-
-                $('#correct').html("Correct " + wins);
-                $('#incorrect').html("Incorrect " + losses);
-                $('#unanswered').html("Not Fast Enough " + unanswered);
-                $('#restart').show(); 
-
+                hideAndSeek();
                 //restart();
 
             } else if (correctAnswer === value) {
                 wins++;
                 initialQuestion++;
-                timeTwo = 0;
-                console.log('Wins ' + wins);
+                timerTwo = 0;
+                //console.log('Wins ' + wins);
 
             } else if (correctAnswer !== value) {
                 losses++;
                 initialQuestion++;
-                timeTwo = 0;
-                console.log('Losses ' + losses);
+                timerTwo = 0;
+                //console.log('Losses ' + losses);
 
             } 
             
