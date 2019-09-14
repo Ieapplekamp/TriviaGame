@@ -3,7 +3,11 @@
 $(document).ready(function() {
 
     $('#restart').hide();
-    var initialQuestion = 0;       //Math.floor(Math.random() * 7);
+
+    var wins = 0;
+    var losses = 0;
+
+    var initialQuestion = 0;     
     var questionAmount = 10;
     
     // --------------------- stop watch begins -------------------- \\
@@ -12,7 +16,7 @@ $(document).ready(function() {
     var intervalTwo;
 
     var clockRunning = false;
-    var timer = 30;
+    var timer = 120;
     var timerTwo = 0;
       
     // On click event that starts the game
@@ -30,11 +34,10 @@ $(document).ready(function() {
         initialQuestion = 0;
         wins = 0;
         losses = 0;
-        unanswered = 0;
 
         $('#correct').hide();
         $('#incorrect').hide();
-        $('#unanswered').hide();
+        // $('#unanswered').hide();
         
         $("#theQuestions").show();
         $('#buttons').show();
@@ -52,7 +55,7 @@ $(document).ready(function() {
 
             interval = setInterval(mainTimer, 1000);
             intervalTwo = setInterval(shortTimer, 1000);
-            //console.log(interval); // why did this say 3 lol
+            
             clockRunning = true;
             $('#start').hide();
             $('#restart').hide();
@@ -70,14 +73,15 @@ $(document).ready(function() {
         $('#restart').show(); 
         $('#correct').show();
         $('#incorrect').show();
-        $('#unanswered').show();
+        // $('#unanswered').show();
 
         $('#correct').html("Correct: " + wins);
         $('#incorrect').html("Incorrect: " + losses);
-        $('#unanswered').html("Couldn't decide in time: " + (questionAmount - initialQuestion));
+        console.log(questionAmount);
+        $('#unanswered').html(wins + losses + "/11 Completed");
     }
   
-  
+    
     function mainTimer() {
         
         var converter = timeConverter(timer--);
@@ -85,31 +89,29 @@ $(document).ready(function() {
   
         if (timer === 0) {
             alert("Times Up");
-            //initialQuestion++;
+            
             clearInterval(interval);
             clearInterval(intervalTwo);
-            //initialQuestion = 0;
             
             hideAndSeek();
-            //$('#unanswered').html("Couldn't decide in time: " +  (questionAmount - initialQuestion));
             
         }
   
     }
-    
+    // maybe add a box that holds time stamps after completing a game
     function shortTimer() {
        
         var converter = timeConverter(timerTwo++);
         $('#recommendedTimer').text(converter);
         
         if (timerTwo === 16) {
-            //questionAmount--;
-            //initialQuestion++;
+            losses++;
+            initialQuestion++;
             timerTwo = 0;
             
             starterQuestion();
             $("button").slice(4).hide();
-            //console.log('unanswered ' + unanswered);
+            
         } else if (initialQuestion === questionAmount) {
                
             clearInterval(intervalTwo);
@@ -199,12 +201,7 @@ $(document).ready(function() {
         }
     ];
 
-    var wins = 0;
-    var losses = 0;
-    var unanswered = 0;
-
-    // var initialQuestion = 0;       //Math.floor(Math.random() * 7);
-    // var questionAmount = 10;
+  
 
     function starterQuestion() {
 
@@ -212,12 +209,10 @@ $(document).ready(function() {
         var choices = questionsAnswers[initialQuestion].choices;
         var correctAnswer = questionsAnswers[initialQuestion].answer;
         
-        //console.log(questions);
         
         $("#theQuestions").html(questions + '<br>');
         
-
-
+        $('#unanswered').html(wins + losses + "/11 Completed");
 
         for (var i = 0; i < choices.length; i++) {
 
@@ -243,18 +238,19 @@ $(document).ready(function() {
                 initialQuestion = 0;
                 
                 hideAndSeek();
-                //restart();
 
-            } else if (correctAnswer === value) {
+            } if (correctAnswer === value) {
                 wins++;
                 initialQuestion++;
                 timerTwo = 0;
+                $('#unanswered').html(wins + losses + "/11 Completed");
                 //console.log('Wins ' + wins);
 
             } else if (correctAnswer !== value) {
                 losses++;
                 initialQuestion++;
                 timerTwo = 0;
+                $('#unanswered').html(wins + losses + "/11 Completed");
                 //console.log('Losses ' + losses);
 
             } 
