@@ -36,8 +36,6 @@ $(document).ready(function() {
         $('#buttons').show();
         // $("button").slice(4).hide();
         
-        // start();
-        // // startTimer();
         startTimer();
         starterQuestion();
         $("button").slice(4).hide();
@@ -74,6 +72,18 @@ $(document).ready(function() {
             //console.log('You dead');
             clearInterval(interval);
             clearInterval(intervalTwo);
+            initialQuestion = 0;
+                
+            $('#buttons').hide();
+            $('#theQuestions').hide();
+            $('#correct').show();
+            $('#incorrect').show();
+            $('#unanswered').show();
+
+            $('#correct').html("Correct " + wins);
+            $('#incorrect').html("Incorrect " + losses);
+            $('#unanswered').html("Not Fast Enough " + unanswered);
+            $('#restart').show(); 
         }
   
     }
