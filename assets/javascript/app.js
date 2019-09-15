@@ -66,7 +66,7 @@ $(document).ready(function() {
 
     var wins = 0;
     var losses = 0;
-
+    var incorrectGuesses = [];
     var initialQuestion = 0;     
     var questionAmount = 10;
     
@@ -83,6 +83,20 @@ $(document).ready(function() {
     $('#start').on("click", startTimer);
     $('#restart').on("click", restart);
     // on click event that restarts the game
+
+    function loop() {
+        for (var i = 0; i < incorrectGuesses.length; i++) {
+            var test = $('<h4>');
+            test.attr('data-info', incorrectGuesses[i]);
+            test.text(incorrectGuesses[i]);
+
+            //test
+            //test.attr('data-info', this[i]);
+            $('#incorrectGuesses').append(test);
+            console.log(test);
+        }
+    }
+
     function restart() {
         
         clearInterval(interval);
@@ -94,9 +108,11 @@ $(document).ready(function() {
         initialQuestion = 0;
         wins = 0;
         losses = 0;
+        incorrectGuesses = [];
 
         $('#correct').hide();
         $('#incorrect').hide();
+        $('#incorrectGuesses').empty();
         // $('#unanswered').hide();
         
         $("#theQuestions").show();
@@ -133,13 +149,13 @@ $(document).ready(function() {
         $('#restart').show(); 
         $('#correct').show();
         $('#incorrect').show();
-        // $('#unanswered').show();
 
         $('#correct').html("Correct: " + wins);
         $('#incorrect').html("Incorrect: " + losses);
-        var winsAndLosses = wins + losses
-        console.log(questionAmount);
+        var winsAndLosses = wins + losses;
         $('#unanswered').html((winsAndLosses) + "/11 Completed");
+        loop();
+        //$("#incorrectGuesses").append(incorrectGuesses);
     }
   
     
@@ -226,8 +242,6 @@ $(document).ready(function() {
         $('.multipleChoices').on('click', function() {
             var value = $(this).attr("data-choices");
             //console.log(value);
-
-            // This is pretty much the results condition
             
             if (initialQuestion === questionAmount) {
                 
@@ -240,26 +254,26 @@ $(document).ready(function() {
                         losses++;
                     }
                 }
-                //initialQuestion = 0;
                 
                 hideAndSeek();
                 $('#unanswered').html((winsAndLosses - 1) + "/11 Completed");
 
             } if (correctAnswer === value) {
                 wins++;
-                console.log(wins);
+                //console.log(wins);
                 initialQuestion++;
                 timerTwo = 0;
                 $('#unanswered').html(wins + losses + "/11 Completed");
-                //console.log('Wins ' + wins);
-
+                
             } else if (correctAnswer !== value) {
                 losses++;
-                console.log(losses);
+                incorrectGuesses.push(questionsAnswers[initialQuestion].question);
+                console.log(incorrectGuesses);
+                //console.log(losses);
                 initialQuestion++;
                 timerTwo = 0;
                 $('#unanswered').html(wins + losses + "/11 Completed");
-                //console.log('Losses ' + losses);
+    
 
             } 
             
