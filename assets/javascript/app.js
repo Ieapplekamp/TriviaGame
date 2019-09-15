@@ -64,6 +64,7 @@ $(document).ready(function() {
         }
     ];
 
+
     // Globes
     var wins = 0;
     var losses = 0;
@@ -77,6 +78,7 @@ $(document).ready(function() {
     var clockRunning = false;
     var timer = 120;
     var timerTwo = 0;
+    
       
     // On click event startTimer === start game
     $('#start').on("click", startTimer);
@@ -146,7 +148,7 @@ $(document).ready(function() {
 
         $('#buttons').hide();
         $('#theQuestions').hide();
-
+        
         $('#restart').show(); 
         $('#correct').show();
         $('#incorrect').show();
@@ -172,7 +174,8 @@ $(document).ready(function() {
             clearInterval(intervalTwo);
             
             hideAndSeek();
-            
+            //loop();
+            //console.log(hideAndSeek());
         }
     }
     //Timer 2
@@ -183,10 +186,12 @@ $(document).ready(function() {
         
         if (timerTwo === 16) {
             losses++;
-            initialQuestion++;
-            timerTwo = 0;
             
+            timerTwo = 0;
+            incorrectGuesses.push(questionsAnswers[initialQuestion].question);
+            initialQuestion++;
             starterQuestion();
+            console.log(incorrectGuesses);
             $("button").slice(4).hide();
             
         } else if (initialQuestion === questionAmount) {
@@ -214,7 +219,7 @@ $(document).ready(function() {
   
   // --------------------- stop watch ends -------------------- \\
 
-    function starterQuestion() {    // This is the main block of code and holds the buttons 
+    function starterQuestion() {    // This is the main block of code and holds buttons
 
         var questions = questionsAnswers[initialQuestion].question;
         var choices = questionsAnswers[initialQuestion].choices;
@@ -238,6 +243,16 @@ $(document).ready(function() {
         $('.multipleChoices').on('click', function () {
             
             var value = $(this).attr("data-choices");
+
+            // if (initialQuestion == 0 && correctAnswer !== value) {
+            //     incorrectGuesses.push("Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?");
+            //     //incorrectGuesses.pop();
+            //     //incorrectGuesses.indexOf(2).pop();
+                
+            // }
+            // else if (initialQuestion == 1 && correctAnswer === value) {
+            //      incorrectGuesses.pop();
+            // } 
             
             if (initialQuestion === questionAmount) {
                 
@@ -253,6 +268,7 @@ $(document).ready(function() {
                 }
                 
                 hideAndSeek();
+                // var winsAndLosses = wins + losses;  -- with the initial run it will say 12/11 completed and this will get ride of my console error and then refer to the error around 222 again
                 $('#unanswered').html((winsAndLosses - 1) + "/11 Completed"); // This gives an error in the console and then refers to line 222, but everything works and works correctly with this variable 
 
             } if (correctAnswer === value) {
@@ -264,10 +280,11 @@ $(document).ready(function() {
                 
             } else if (correctAnswer !== value) {
                 losses++;
-                initialQuestion++;
+                
                 timerTwo = 0;
                 incorrectGuesses.push(questionsAnswers[initialQuestion].question);
-        
+                initialQuestion++;
+                console.log(incorrectGuesses);
                 $('#unanswered').html(wins + losses + "/11 Completed");
     
             } 
