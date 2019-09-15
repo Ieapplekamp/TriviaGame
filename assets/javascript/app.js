@@ -3,6 +3,66 @@
 $(document).ready(function() {
 
     $('#restart').hide();
+    // possible questions
+    var questionsAnswers = [
+        
+        { //
+            question: "Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?",
+            choices: ["Cry Cry Cry", "Hurt", "Ring Of Fire", "All I DO Is Drive"],
+            answer: 'Ring Of Fire'
+        },
+        { //
+            question: "What was the band known as Linkin Park originally called?",
+            choices: ["Reanimators", "Meteora", "Hybrid Theory", "Xero"],
+            answer: 'Xero'
+        },
+        { //
+            question: "What was the name of the airplane Buddy Holly died in?",
+            choices: ["So Long", "American Pie", "Peggy Sue", "Rave On"],
+            answer: 'American Pie'
+        },
+        { //
+            question: "What was Bob Marley's song 'I Shot the Sheriff' really about?",
+            choices: ["His Record Label", "The Media", "Birth Control", "Irish Republican Army"],
+            answer: 'Birth Control'
+        },
+        { //
+            question: "How many different instruments did Prince play on his debut album?",
+            choices: ["16", "9", "3", "27"],
+            answer: '27'
+        },
+        { //
+            question: "What band did Prince form in 1981?",
+            choices: ["The Revolution", "The Bangles", "3rdeyegirl", "The Time"],
+            answer: 'The Time'
+        },
+        { // 
+            question: "What band was originally named Tony Flow and the Miraculously Majestic Masters of Mayhem?",
+            choices: ["Pear Jam", "Red Hot Chili Peppers", "Pierce The Veil", "G-Unit"],
+            answer: 'Red Hot Chili Peppers'
+        },
+        { 
+            question: "Which of these is not a Frank Ocean song?",
+            choices: ["Nikes", "Pink Matter", "Pyramids", "1. The Worst Guys"],
+            answer: '1. The Worst Guys'
+        },
+        { 
+            question: "Who bumped Michael Jackson off the #1 spot in January 1992?",
+            choices: ["Madonna", "Nirvana", "Mariah Carey", "Guns N' Roses"],
+            answer: 'Nirvana'
+        },
+        { 
+            question: "What day 2pac die?",
+            choices: ["September 13th, 1996", "September 13th, 1995", "August 29th, 1996", "July 14th, 1996"],
+            answer: 'September 13th, 1996'
+        },
+        {
+            question: "Who sings Baby Boy",
+            choices: ["Beyoncé", "Ciara", "Mariah Carey", "Destiny's Child"],
+            answer: 'Beyoncé'
+        }
+    ];
+
 
     var wins = 0;
     var losses = 0;
@@ -77,8 +137,9 @@ $(document).ready(function() {
 
         $('#correct').html("Correct: " + wins);
         $('#incorrect').html("Incorrect: " + losses);
+        var winsAndLosses = wins + losses
         console.log(questionAmount);
-        $('#unanswered').html(wins + losses + "/11 Completed");
+        $('#unanswered').html((winsAndLosses) + "/11 Completed");
     }
   
     
@@ -140,69 +201,6 @@ $(document).ready(function() {
   
   // --------------------- stop watch ends -------------------- \\
 
-    
-    // possible questions
-    var questionsAnswers = [
-        
-        { //
-            question: "Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?",
-            choices: ["Cry Cry Cry", "Hurt", "Ring Of Fire", "All I DO Is Drive"],
-            answer: 'Ring Of Fire'
-        },
-        { //
-            question: "What was the band known as Linkin Park originally called?",
-            choices: ["Reanimators", "Meteora", "Hybrid Theory", "Xero"],
-            answer: 'Xero'
-        },
-        { //
-            question: "What was the name of the airplane Buddy Holly died in?",
-            choices: ["So Long", "American Pie", "Peggy Sue", "Rave On"],
-            answer: 'American Pie'
-        },
-        { //
-            question: "What was Bob Marley's song 'I Shot the Sheriff' really about?",
-            choices: ["His Record Label", "The Media", "Birth Control", "Irish Republican Army"],
-            answer: 'Birth Control'
-        },
-        { //
-            question: "How many different instruments did Prince play on his debut album?",
-            choices: ["16", "9", "3", "27"],
-            answer: '27'
-        },
-        { //
-            question: "What band did Prince form in 1981?",
-            choices: ["The Revolution", "The Bangles", "3rdeyegirl", "The Time"],
-            answer: 'The Time'
-        },
-        { // 
-            question: "What band was originally named Tony Flow and the Miraculously Majestic Masters of Mayhem?",
-            choices: ["Pear Jam", "Red Hot Chili Peppers", "Pierce The Veil", "G-Unit"],
-            answer: 'Red Hot Chili Peppers'
-        },
-        { 
-            question: "Which of these is not a Frank Ocean song?",
-            choices: ["Nikes", "Pink Matter", "Pyramids", "1. The Worst Guys"],
-            answer: '1. The Worst Guys'
-        },
-        { 
-            question: "Who bumped Michael Jackson off the #1 spot in January 1992?",
-            choices: ["Madonna", "Nirvana", "Mariah Carey", "Guns N' Roses"],
-            answer: 'Nirvana'
-        },
-        { 
-            question: "What day 2pac die?",
-            choices: ["September 13th, 1996", "September 13th, 1995", "August 29th, 1996", "July 14th, 1996"],
-            answer: 'September 13th, 1996'
-        },
-        {
-            question: "Who sings Baby Boy",
-            choices: ["Beyoncé", "Ciara", "Mariah Carey", "Destiny's Child"],
-            answer: 'Beyoncé'
-        }
-    ];
-
-  
-
     function starterQuestion() {
 
         var questions = questionsAnswers[initialQuestion].question;
@@ -229,18 +227,27 @@ $(document).ready(function() {
             var value = $(this).attr("data-choices");
             //console.log(value);
 
-// This is pretty much the results condition
+            // This is pretty much the results condition
             
             if (initialQuestion === questionAmount) {
-
+                
                 clearInterval(interval);
                 clearInterval(intervalTwo);
-                initialQuestion = 0;
+                if (correctAnswer === value) {
+                    wins++;
+                } else {
+                    if (correctAnswer !== value) {
+                        losses++;
+                    }
+                }
+                //initialQuestion = 0;
                 
                 hideAndSeek();
+                $('#unanswered').html((winsAndLosses - 1) + "/11 Completed");
 
             } if (correctAnswer === value) {
                 wins++;
+                console.log(wins);
                 initialQuestion++;
                 timerTwo = 0;
                 $('#unanswered').html(wins + losses + "/11 Completed");
@@ -248,6 +255,7 @@ $(document).ready(function() {
 
             } else if (correctAnswer !== value) {
                 losses++;
+                console.log(losses);
                 initialQuestion++;
                 timerTwo = 0;
                 $('#unanswered').html(wins + losses + "/11 Completed");
