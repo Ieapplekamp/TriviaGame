@@ -210,9 +210,6 @@ $(document).ready(function() {
         if (minutes === 0) {
             minutes = "0";
         }
-        // else if (minutes < 10) {
-        //     minutes = "0" + minutes;
-        // }
         
         return minutes + " : " + seconds;
     }
