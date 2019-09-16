@@ -105,7 +105,7 @@ $(document).ready(function() {
         clearInterval(intervalTwo);
         
         clockRunning = false;
-        timer = 119;
+        timer = 120;
         timerTwo = 0;
         initialQuestion = 0;
         wins = 0;
@@ -167,7 +167,7 @@ $(document).ready(function() {
         var converter = timeConverter(timer--);
         $('#timer').text(converter);
   
-        if (timer === -1) {
+        if (timer === 0) {
             alert("Times Up");
             
             clearInterval(interval);
