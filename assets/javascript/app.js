@@ -167,7 +167,7 @@ $(document).ready(function() {
         var converter = timeConverter(timer--);
         $('#timer').text(converter);
   
-        if (timer === 0) {
+        if (timer === -1) {
             alert("Times Up");
             
             clearInterval(interval);
