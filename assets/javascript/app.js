@@ -9,7 +9,7 @@ $(document).ready(function() {
         
         { //
             question: "Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?",
-            choices: ["Cry Cry Cry", "Hurt", "Ring Of Fire", "All I DO Is Drive"],
+            choices: ["Cry Cry Cry", "Hurt", "Ring Of Fire", "All I Do Is Drive"],
             answer: 'Ring Of Fire'
         },
         { //
@@ -90,7 +90,7 @@ $(document).ready(function() {
 
         for (var i = 0; i < incorrectGuesses.length; i++) {
 
-            var test = $('<h4>');
+            var test = $('<li>');
             test.attr('data-info', incorrectGuesses[i]);
             test.text(incorrectGuesses[i]);
             $('#incorrectGuesses').append(test);
@@ -105,7 +105,7 @@ $(document).ready(function() {
         clearInterval(intervalTwo);
         
         clockRunning = false;
-        timer = 120;
+        timer = 119;
         timerTwo = 0;
         initialQuestion = 0;
         wins = 0;
@@ -121,7 +121,7 @@ $(document).ready(function() {
         
         startTimer();
         starterQuestion();
-        $("button").slice(4).hide();
+        $(".multipleChoices").slice(4).hide();
     
     }
 
@@ -174,8 +174,7 @@ $(document).ready(function() {
             clearInterval(intervalTwo);
             
             hideAndSeek();
-            //loop();
-            //console.log(hideAndSeek());
+    
         }
     }
     //Timer 2
@@ -184,7 +183,7 @@ $(document).ready(function() {
         var converter = timeConverter(timerTwo++);
         $('#recommendedTimer').text(converter);
         
-        if (timerTwo === 16) {
+        if (timerTwo === 11) {
             losses++;
             
             timerTwo = 0;
@@ -192,7 +191,7 @@ $(document).ready(function() {
             initialQuestion++;
             starterQuestion();
             console.log(incorrectGuesses);
-            $("button").slice(4).hide();
+            $(".multipleChoices").slice(4).hide();
             
         } else if (initialQuestion === questionAmount) {
             clearInterval(intervalTwo);
@@ -209,10 +208,11 @@ $(document).ready(function() {
             seconds = "0" + seconds;
         }
         if (minutes === 0) {
-            minutes = "00";
-        } else if (minutes < 10) {
-            minutes = "0" + minutes;
+            minutes = "0";
         }
+        // else if (minutes < 10) {
+        //     minutes = "0" + minutes;
+        // }
         
         return minutes + " : " + seconds;
     }
@@ -232,6 +232,7 @@ $(document).ready(function() {
 
             var result = $("<button>");
             result.addClass("multipleChoices");
+            result.addClass('btn btn-warning float-center');
             result.attr("data-choices", choices[i]);
             result.text(choices[i]);
         
@@ -243,17 +244,7 @@ $(document).ready(function() {
         $('.multipleChoices').on('click', function () {
             
             var value = $(this).attr("data-choices");
-
-            // if (initialQuestion == 0 && correctAnswer !== value) {
-            //     incorrectGuesses.push("Which Johnny Cash song did an advertising company want to use for a hemorrhoids ad?");
-            //     //incorrectGuesses.pop();
-            //     //incorrectGuesses.indexOf(2).pop();
-                
-            // }
-            // else if (initialQuestion == 1 && correctAnswer === value) {
-            //      incorrectGuesses.pop();
-            // } 
-            
+ 
             if (initialQuestion === questionAmount) {
                 
                 clearInterval(interval);
@@ -290,7 +281,7 @@ $(document).ready(function() {
             } 
             
             starterQuestion();
-            $("button").slice(4).hide();
+            $(".multipleChoices").slice(4).hide();
     
         })
         

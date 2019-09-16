@@ -1,9 +1,116 @@
 body {
-    background-color: pink;
+    background-color: #3b7398;
+    font-size: 1em;
 }
 
 .designs {
+    margin: 3% 10% 3% 10%;
+    font-family: Alegreya;
     /* position: absolute; */
+    padding: 2% 2% 1% 2%;
     border: solid 10px black;
+    background-color: #c0d0e9;
+    
+}
+
+.card {
+    color: #c0d0e9;
+    background-color: transparent;
+}
+.card-body {
+    font-size: 1.2em;
+    background-color: rgba(23, 18, 27, 0.8)
+}
+.btn-link, .btn-link.focus, .btn-link:focus {
+    text-decoration: none;
+    color: black;
+}
+.btn-link:hover, #start:hover, #restart:hover {
+    /* color: #954580; */
+    cursor: pointer;
+    
+}
+.btn-link:hover {
+    color: #954580;
+}
+
+.btn-warning {
+    background-color: #954580;;
+    border-color: #954580;;
+    
+}
+.btn-warning:hover, .btn-warning:active {
+    background-color: #e3746b;
+    border-color: #e3746b;
+}
+.btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show>.btn-warning.dropdown-toggle {
+    background-color: #e3746b;
+    border-color: #e3746b;
+}
+.btn-warning.focus, .btn-warning:focus {
+    box-shadow: 0 0 0 0.2rem #e3746b;
+}
+
+#incorrectGuesses {
+    margin-top: 2%;
+    padding-left: 15%;
+}
+/* .spacing {
+    margin-top: 4%;
+} */
+
+span {
+    font-size: 3.5em;
+    
+}
+button {
+    width: 27%;
+    margin: 1%;
+}
+
+li {
+    font-size: 1.5rem;
+}
+#unanswered {
+    padding-top: 3%;
+    font-weight: bold;
+    font-size: 1em;
+}
+#start, #restart {
+    margin-left: 47%;
+    margin-bottom: 2%;
+}
+#correct {
+    margin-top: 3%;
+}
+#theQuestions {
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+@media only screen and (max-width: 768px) {
+    #incorrectGuesses {
+        margin-top: 4%;
+        padding-left: 7%;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    li {
+        font-size: 1em;
+    }
+    #start, #restart {
+        margin-left: 45%
+    }
+    #incorrectGuesses {
+        padding-left: 2%;
+    }
+    #theQuestions {
+        font-size: 2em;
+        margin-bottom: 5%;
+    }
+    .new {
+        margin-right: 50%;
+    }
     
 }

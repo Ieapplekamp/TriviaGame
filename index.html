@@ -10,34 +10,54 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Main div that holds everything -->
     <div class="designs">
-    <h1 class="text-center">Music Trivial Trivia</h1>
-    <br>
-
-    <h2 id="timer">02 : 00</h2>
-    <h2 id="recommendedTimer">00 : 00</h2>
-
-    <h2 class="text-center" id="start">Start</h2>
-    <h2 class="text-center" id="restart">Restart</h2>
-
-    <h2 id="correct"></h2>
-    <h2 id="incorrect"></h2>
+    <!-- Drop down feature -->
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="new mb-0 text-center">
+                        <button class="btn badge btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Music Trivial Trivia!
+                        </button>
+                    </h2>
+                </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <strong>Welcome to Music Trivial Trivia!</strong><br><br>You'll have two minutes to complete the quiz and roughly 10 seconds per question. Be sure to answer each question within time, if you do NOT answer the question in time, it will be counted against you! Any questions answered incorrectly will appear at the very end of the quiz along with the amount of correct answers.
+                            <br><br> If you'd like to test your luck for a second or third time, press the Reset button and the quiz will immediately start over.
+                            <br><br> <strong>Note: </strong>For the last question, and last question only, you'll be provided additional time where the shorter timer will not be applied. (You gotta at least get one right answer)
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <br>
+        <!-- spans hold the timers -->
+        <span class="text-left" id="timer">2 : 00</span>
+        <span class="float-right" id="recommendedTimer">0 : 00</span>
+        <!-- Start and Restart events -->
+        <div class='spacing'>
+            <h2 class="align-items-center btn btn-warning" id="start">Start</h2>
+            <h2 class="text-center btn btn-warning" id="restart">Restart</h2>
+        </div>
+        <!-- Totals -->
+        <h3 id="correct"></h3>
+        <h3 id="incorrect"></h3>
     
-
-    <h1 class="text-center" id="theQuestions"></h1>
-
-    <div class="text-center" id="buttons">
-
-    </div>
-    <div id="incorrectGuesses"></div>
-    <h5 class="text-right" id="unanswered"></h5>
-    </div>
-    <!-- <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-    </div> -->
+        <!-- Displays the question -->
+        <h1 class="text-center" id="theQuestions"></h1>
+        <!-- Display the button choices for the questions -->
+        <div class="text-center" id="buttons"></div>
+        <!-- Displays the questions that were answered incorrectly -->
+        <div id="incorrectGuesses"></div>
+        <!-- holds the place value of the question -->
+        <h4 class="text-right" id="unanswered"></h4>
     
-<script
-src="https://code.jquery.com/jquery-3.4.1.js"
+    </div>
+    
+<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
+<script src="https://code.jquery.com/jquery-3.4.1.js"
 integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 crossorigin="anonymous"></script>
 <script src="./assets/javascript/app.js" type="text/javascript"></script>    
