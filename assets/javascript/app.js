@@ -252,6 +252,7 @@ $(document).ready(function() {
                 } else {
                     if (correctAnswer !== value) {
                         losses++;
+                        incorrectGuesses.push(questionsAnswers[initialQuestion].question);
                     }
                 }
                 
